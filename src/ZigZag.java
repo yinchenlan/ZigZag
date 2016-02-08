@@ -16,7 +16,7 @@ public class ZigZag {
 		//down
 		cache[1] = new int[in.length];
 		Arrays.fill(cache[1], 1);
-		int max = 0;
+		int max = 1;
 		for (int end = 1; end < in.length; end++) {
 			for (int start = 0; start < end; start++) {
 				//update up array by checking down array
@@ -27,11 +27,7 @@ public class ZigZag {
 				if (in[end] < in[start] && cache[0][start] + 1 > cache[1][end]) {
 					cache[1][end] = cache[0][start] + 1;
 				}
-			}
-		}
-		for (int row = 0; row < 2; row++) {
-			for (int col = 0; col < in.length; col++) {
-				if (cache[row][col] > max) max = cache[row][col];
+				max = Math.max(max, Math.max(cache[0][end], cache[1][end]));
 			}
 		}
 		return max;
